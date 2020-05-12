@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title>Solar system</title>
+<script>
+ var sun = new Image();
+ var suns_num = 60;
+    var cur_sun = 0;
+                var moon = new Image();
+                var earth = new Image();
+                var earth_a = 0;
+                var earth_step = 0.01;
+                var moon_a = Math.PI;
+                var moon_step = 0.02;
+                    function init(){
+                      sun.src = "SSimg/sun/sun1.png";
+                       moon.src = 'SSimg/moon.png';
+                       earth.src = 'SSimg/earth.png';
+                  window.requestAnimationFrame(draw);
+                }
+                
+                function draw() {
+                  var ctx = document.getElementById('SS').getContext('2d');
+                  ctx.clearRect(0,0,1200,998); 
+
+                   // Sun
+                   ctx.drawImage(sun,500, 400);
+                ++cur_sun;
+                if (cur_sun >= suns_num) cur_sun = 1;
+                sun.src = "SSimg/sun/sun" + cur_sun + ".png";
+
+                // Earth    
+                  ctx.save();
+                  ctx.translate(600,500);
+                  ctx.rotate(earth_a);
+                  earth_a += earth_step;
+                  ctx.drawImage(earth,250,0);
+
+                  // Moon
+                  ctx.translate(300,50);
+                  ctx.rotate(moon_a);
+                  moon_a += moon_step;
+                  ctx.drawImage(moon,50,0);
+                  ctx.restore();
+
+                  window.requestAnimationFrame(draw);
+                }
+</script>
+<style>
+    body {
+        background: gray;
+        
+    }
+#SS {
+    background: black;
+   
+}    
+</style>
+</head>
+<body>
+
+<canvas width=1200px, height=998px, id="SS">
+</canvas>
+
+<script>
+init(); 
+</script>
+
+
+</script>
+
+
+</body>
+</html>

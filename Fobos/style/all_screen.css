@@ -1,0 +1,27 @@
+* { 
+  margin:0; 
+  padding:0; 
+} /* to remove the top and left whitespace */
+
+html, body { 
+  width:100%; 
+  height:100%; 
+} /* just to be sure these are full screen*/
+
+canvas#game { 
+    display: block;
+    background: black;
+  }
+
+  #load_img {
+    position: absolute;
+  }
+
+  @font-face {
+    font-family: Squaresharps; /* Гарнитура шрифта */
+    src: url(fonts/Squaresharps/Squaresharps_Italic.ttf); /* Путь к файлу со шрифтом */
+   }
+
+   body {
+     cursor: url("cursor.png") 2 1, auto;
+   }

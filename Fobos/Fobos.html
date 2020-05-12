@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title>Fobos</title>
+        <link rel="icon" href="img/favicon/Moon.png" type="image/png">
+        <link rel="shortcut icon" href="img/favicon/Moon.png" type="image/png">  
+        <link rel="styleSheet" type="text/css" href="style/all_screen.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="script/Consts.js"></script>
+                <script src="script/Textures.js"></script>
+        <script src="script/Images.js"></script>
+        <script src="script/GameScreen.js"></script>
+        <script src="script/Map.js"></script>
+        <script src="script/Player.js"></script>
+        <script src="script/Objects.js"></script>
+        <script src="script/Sounds.js"></script>
+        <script src="script/EventListeners.js"></script>
+        <script src="script/Algorithms.js"></script>
+        <script src="script/Sprites.js"></script>
+        <script src="script/Geometry.js"></script>
+        <script>
+
+               var GS;
+               var sprites;
+               var objects = new Array();
+
+            function draw_noise(GS) { // for future
+                for (var j = 0; j < GS.h; j++) 
+                    for (var i = 0; i < GS.w; i++) 
+                        GS.pack_color(i, j, Math.sin(i)*256*Math.random(), Math.cos(j)*256*Math.random(), Math.sin(j)*256*Math.random());
+                
+                GS.draw();
+                setTimeout(function() {draw_noise(GS)}, 17);
+            }
+
+            async function play() {
+                GS.clear();
+                await GS.render(lvl1_map,  lvl1_Textures, sprites);
+                GS.draw();
+
+                    window.requestAnimationFrame(play);
+            }
+
+            function start() {
+                var rnd = Math.random();
+                var rnd_y;
+                if (rnd <= 0.0001 && (aster_x >= GS.w || aster_y >= GS.h)) {
+                    var rnd_x = (Math.random() <= 0.5) ? Math.random() * GS.w : -100;
+                    if (rnd_x == -100) rnd_y = Math.random() * GS.h;
+                    else rnd_y = -100;
+                    aster_x = rnd_x;
+                    aster_y = rnd_y;
+                } 
+                GS.mainScreen();
+              if (!is_started)  window.requestAnimationFrame(start);
+               
+            }
+
+
+            $(document).ready(function() {
+                setTimeout(function(){
+                    setTimeout(loadImages, 500);
+                    
+                    lvl1_Textures = new Textures(64, 6);
+                    currentTexture = lvl1_Textures;
+                    player = new Player(3.4709431535562274, 8.7999938037076, -0.785398163 - PI);
+                    GS = new GameScreen();
+                    startEventsMainMenu()
+                    
+                    setTimeout(start,1000);
+                },500);
+
+            });
+        </script>
+     
+        
+    </head>
+    <body>
+            <canvas id="load_img"></canvas>
+        <canvas id="game" ></canvas>
+        <p id="test"></p>
+    </body>
+</html>
