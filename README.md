@@ -8,6 +8,6 @@ Using guide:
   
 If you want to use Node.js then:
   1. Open Node.js command prompt.
-  2. type "cd" command to the game directory.
+  2. type cd command to the game directory.
   3. type "http-server"
   4. open one of the available addresses and add "/Fobos.html" to play. For example, http://192.168.0.106:8080/Fobos.html
